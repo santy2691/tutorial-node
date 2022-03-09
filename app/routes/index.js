@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const User = require('../User')
+const User = require('../controlles/User')
 
 router.get('/', (req,res)=>{
     res.sendFile('index.html');
