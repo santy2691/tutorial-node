@@ -6,20 +6,24 @@ let User = require('../models/user')
 exports.isMayor = function(req,res) {
     let esMayor = parseInt(req.body.age) >= 18  ? " si eres mayor " : " no eres mayor "
     let nombre = req.body.name;
+    let respestaBD = createUser({name: req.body.name, age: req.body.age});
+    if (respestaBD === "not_success") {
+        return res.send("el usuario " + nombre + "no se pudo guardar");
+    }
     return res.send(esMayor + nombre );
 };
 
 
-exports.createUser = function(req,res) {
-    let user = new User({name: req.body.name, age: req.body.age});
+const createUser = function({name, age}) {
+    let user = new User({name:name, age: age});
     try{
         user.save(function (err) {
         if (err) console.log(err)
         // saved!
       });
-        res.end("datos guardados");
+        return {respuesta :"success"};
     }catch(e){
-        console.log(e);
+        return {respuesta : "not_success"};
     }
 };
 

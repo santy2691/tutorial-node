@@ -8,7 +8,7 @@ router.get('/', (req,res)=>{
 
 
 router.post('/mayor', UserController.isMayor);
-router.post('/createUser', UserController.createUser);
+
 
 router.get('/list',UserController.list);
 
